@@ -9,6 +9,10 @@ namespace IndianStatesCensusAnalyzing
     {
         public int NumberOfRecords(string filePath)
         {
+            if (!File.Exists(filePath))
+            {
+                throw new CustomExceptions(CustomExceptions.ExceptionType.File_NOT_FOUND, "No file found in given path.");
+            }
             if(filePath.Split(".")[1] != "csv")
             {
                 throw new CustomExceptions(CustomExceptions.ExceptionType.NOT_CSV, "Passed a non CSV format file type");
@@ -27,6 +31,10 @@ namespace IndianStatesCensusAnalyzing
                     {
                         throw new CustomExceptions(CustomExceptions.ExceptionType.NOT_CORRECT_DELIMITER, "Delimiter is other than comma.");
                     }
+                    if (count == 1 && line.Split(",").Length != 4)
+                    {
+                        throw new CustomExceptions(CustomExceptions.ExceptionType.WRONG_HEADER, "File has incorrect header.");
+                    }
                 }
                 if (count - 1 < 0)
                 {
@@ -35,6 +43,5 @@ namespace IndianStatesCensusAnalyzing
                 return (count - 1);
             }
         }
-        
     }
 }

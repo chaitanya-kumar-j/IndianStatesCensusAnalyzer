@@ -16,12 +16,11 @@ namespace IndianStatesCensusAnalyzing
                 {
                     return true;
                 }
-                return false;
+                throw new CustomExceptions(CustomExceptions.ExceptionType.RECORDS_MISMATCH, "Number of records are not matching.");
             }
             catch (CustomExceptions ex)
             {
-                Console.WriteLine(ex.Message);
-                return false;
+                throw ex;
             }
         }
     }

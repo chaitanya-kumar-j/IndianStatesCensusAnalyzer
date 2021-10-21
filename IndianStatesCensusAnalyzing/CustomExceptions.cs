@@ -4,11 +4,11 @@ using System.Text;
 
 namespace IndianStatesCensusAnalyzing
 {
-    class CustomExceptions : Exception
+    public class CustomExceptions : Exception
     {
         public enum ExceptionType
         {
-            NO_DATA,NOT_CSV,RECORDS_MISMATCH,NOT_CORRECT_DELIMITER
+            File_NOT_FOUND, NO_DATA, NOT_CSV, RECORDS_MISMATCH, NOT_CORRECT_DELIMITER, WRONG_HEADER
         }
         private readonly ExceptionType type;
         public CustomExceptions(ExceptionType Type, string message) : base(message)
